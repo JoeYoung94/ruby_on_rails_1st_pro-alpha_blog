@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   # pages controller, about action
   get 'about', to: 'pages#about'
 
+  resources :articles
+
 end
