@@ -10,6 +10,25 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
- *= require_self
  */
+ @import "bootstrap";
+
+// the logo style
+ #logo {
+   float: left;
+   font-size: 1.7em;
+   color: #fff;
+   text-transform: uppercase;
+   letter-spacing: -1px;
+   font-weight: bold;
+ }
+
+ #logo:hover {
+   color: #fff;
+   text-decoration: none;
+ }
+
+ // the jumbotron text align
+ .center {
+   text-align: center;
+ }
