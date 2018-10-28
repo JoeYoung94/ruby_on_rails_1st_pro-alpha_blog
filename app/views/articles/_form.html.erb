@@ -1,13 +1,4 @@
-<% if @article.errors.any? %>
-  <h4>The following error(s) prevented the article from getting created</h4>
-  <ul>
-    <% @article.errors.full_messages.each do |msg| %>
-
-      <li><%= msg %></li>
-
-      <% end %>
-  </ul>
-<% end %>
+<%= render "shared/errors", obj: @article %>
 
 <div class="row">
   <div class="col-xs-12">
