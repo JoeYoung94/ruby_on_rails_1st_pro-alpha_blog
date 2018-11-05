@@ -111,5 +111,18 @@
  .listing {
    list-style: none;
    padding-left: 0;
-   
+
+ }
+
+ // styling for category list
+ .badge {
+   background-color: #CEF6F5;
+   text-transform: uppercase;
+   letter-spacing: -1px;
+   font-weight: bold;
+ }
+
+ // styling for input check_box
+ .input_checkbox input {
+   width: auto !important;
  }
