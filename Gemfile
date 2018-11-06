@@ -55,6 +55,14 @@ group :development, :test do
   gem 'sqlite3'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rspec-rails', '~> 3.4'
+
+  # capybara is an automation framework used for creating functonal tests that simulates how users will
+  # interact with the application
+  gem 'capybara', '~> 2.5'
+
+  # factory girl allows you create objects taht you need in your tests which can include default values
+  gem 'factory_girl_rails', '~> 4.5.0'
 end
 
 group :development do
@@ -64,14 +72,22 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+
 end
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
+  #gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
+
+  #shoulda-matchers
+  gem 'shoulda-matchers', '~> 3.0', require: false
+  gem 'database_cleaner', '~> 1.5'
+
+  # faker: useful for generating random data for testing
+  gem 'faker', '~> 1.6.1'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
