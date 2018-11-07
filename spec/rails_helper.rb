@@ -11,8 +11,6 @@ require 'rspec/rails'
 require 'shoulda/matchers'
 
 Shoulda::Matchers.configure do |config|
-  #database cleaner
-  #config.use_transactional_fixtures = false
 
   config.integrate do |with|
     with.test_framework :rspec
@@ -20,6 +18,11 @@ Shoulda::Matchers.configure do |config|
   end
 
 
+end
+
+# database Database
+RSpec.configure do |config|
+  config.use_transactional_fixtures = false
 end
 
 
