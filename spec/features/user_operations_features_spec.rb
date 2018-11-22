@@ -1,5 +1,14 @@
 require 'rails_helper'
 describe "user login and check general things", type: :feature do
+  setup do
+    normal_user = FactoryGirl.create(:user)
+    normal_user.username = 'normal_user'
+    normal_user.email = 'testnormal@example.com'
+    normal_user.password = 'password'
+    normal_user.admin = false
+    normal_user.save
+  end
+
   context 'signup and then do all operations' do
     it "signup a new user with valid email and password" do
       sign_up_with 'testNov19', 'testnov19@example.com', 'password'
@@ -27,6 +36,10 @@ describe "user login and check general things", type: :feature do
       expect(page).to have_content 'There are somgthing wrong with your login information'
     end
 
+    it "sign in with normal user" do
+      sign_in_with 'testnormal@example.com', 'password'
+      expect(page).to have_content 'Welcome'
+    end
 
 
     it "signed in and then check all users" do
