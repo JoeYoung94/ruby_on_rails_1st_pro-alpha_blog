@@ -25,7 +25,7 @@ describe "user login and check general things", type: :feature do
 
     it "cannot sign up with invalid email address" do
       sign_up_with 'invalid_username', 'invalid_email', 'password'
-      expect(page).to have_content 'Return to Ariticles list'
+      expect(page).to have_content 'Email is invalid'
     end
 
     it "can sign up with valid email address" do
@@ -36,12 +36,30 @@ describe "user login and check general things", type: :feature do
 
     it "cannot sign up with duplicated email address" do
       sign_up_with 'testnormal', 'testnormal@example.com', 'password'
-      expect(page). to have_content 'Email has already been taken'
+      expect(page).to have_content 'Email has already been taken'
     end
 
     it "cannot sign up with duplicated user name" do
       sign_up_with 'normal_user', 'testnormal@example1.com', 'password'
-      expect(page). to have_content 'Username has already been taken'
+      expect(page).to have_content 'Username has already been taken'
+    end
+
+    it "cannot sign up with too short username" do
+      sign_up_with 'j', 'testnormal@example1.com', 'password'
+      expect(page).to have_content 'Username is too short (minimum is 3 characters)'
+    end
+
+    it "cannot sign up with too long username" do
+      too_long = 'this username is too long long long long long long long long long long'
+      sign_up_with(too_long , 'testnormal@example1.com', 'password')
+      expect(page).to have_content 'Username is too long (maximum is 25 characters)'
+    end
+
+    it "can go to see articles list when signup failed" do
+      sign_up_with('j' , 'testnormal@example1.com', 'password')
+      expect(page).to have_content 'Username is too short (minimum is 3 characters)'
+      click_on_link 'Return to Ariticles list'
+      expect(page).to have_content 'List of Articles'
     end
 
 
