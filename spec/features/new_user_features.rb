@@ -76,13 +76,6 @@ def sign_up_with (username, email, password)
   click_button 'Sign up'
 end
 
-def sign_in_with (email, password)
-  visit login_path
-  fill_in 'Email', with: email
-  fill_in 'Password', with: password
-  click_button 'Login'
-end
-
 def click_on_link(link_name)
   click_link(link_name)
 end
