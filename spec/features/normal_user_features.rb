@@ -106,6 +106,44 @@ describe "normal user operations", type: :feature do
       expect(page).to have_content 'Listing'
       expect(page).to have_content '1 article'
     end
+
+    it "can check a created article under a specific category" do
+      sign_in_with 'testnormal@example.com', 'password'
+      visit new_article_path
+      create_article_with 'test article', 'this is the description', ['category1']
+      visit '/categories'
+      expect(page).to have_content 'Listing'
+      within("#category1") do
+        click_on_link 'category1'
+      end
+      expect(page).to have_content 'Category:category1'
+    end
+  end
+
+  context 'normal user profile operations' do
+    it "can check view user profile" do
+      sign_in_with 'testnormal@example.com', 'password'
+      expect(page).to have_content 'Profile'
+      click_link 'Profile'
+      click_link 'View profile'
+      expect(page).to have_content 'Welcome to'
+      expect(page).to have_content "articles"
+    end
+
+    it "can edit user profile" do
+      sign_in_with 'testnormal@example.com', 'password'
+      expect(page).to have_content 'Profile'
+      click_link 'Profile'
+      click_link 'Edit your profile'
+      expect(page).to have_content "Username"
+      within("#userform") do
+        fill_in 'Username', with: "normal2"
+        fill_in 'Email', with: "testnormal2@example.com"
+        fill_in 'Password', with: "password2"
+        click_button 'Update Account'
+      end
+      expect(page).to have_content "Your account was updated successfully"
+    end
   end
 
 end
