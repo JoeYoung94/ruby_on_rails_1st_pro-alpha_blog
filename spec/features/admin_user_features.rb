@@ -129,6 +129,51 @@ describe "admin user operations", type: :feature do
     end
 
   end
+
+  context 'admin user users operations' do
+    it "can view all users after logging in" do
+      sign_in_with 'testadmin@example.com', 'password'
+      visit users_path
+      expect(page).to have_content 'All Bloggers'
+      expect(page).to have_content 'normal_user'
+    end
+
+    it "can delete a user" do
+      sign_in_with 'testadmin@example.com', 'password'
+      visit users_path
+      expect(page).to have_content 'All Bloggers'
+      within '#user-normal_user' do
+        click_on 'Delete this user'
+      end
+      expect(page).to have_content 'User and all articles created by the user have been deleted'
+    end
+
+  end
+
+  context 'admin user category operations' do
+    it "can view all existing categories" do
+      sign_in_with 'testadmin@example.com', 'password'
+      visit categories_path
+      expect(page).to have_content 'Listing all Categories'
+      expect(page).to have_content 'category1'
+    end
+
+    it "can view a sigle category" do
+      sign_in_with 'testadmin@example.com', 'password'
+      visit categories_path
+      within "#category1" do
+        click_on 'category1'
+      end
+      expect(page).to have_content 'Category:category1'
+    end
+
+    it "can create a category" do
+      sign_in_with 'testadmin@example.com', 'password'
+      visit '/categories/new'
+      expect(page).to have_content 'Create a new Category'
+    end
+  end
+
 end
 
 
@@ -160,4 +205,9 @@ def update_article_with(title, description, categories)
     check category
   end
   click_button 'Update Article'
+end
+
+def create_category_with(category_name)
+  fill_in 'Category', with: category_name
+  click_button 'Create Category'
 end
